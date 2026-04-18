@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX GYM — Forge Your Best</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0a1628;
+    --blue-mid: #0d2d5e;
+    --blue-bright: #1a56db;
+    --blue-electric: #3b82f6;
+    --blue-light: #93c5fd;
+    --blue-glow: #60a5fa;
+    --white: #ffffff;
+    --white-muted: #e8f0fe;
+    --gray: #64748b;
+    --accent: #00d4ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blue-deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(59,130,246,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--white-muted); text-decoration: none;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--blue-bright); color: white;
+    padding: 0.65rem 1.6rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .nav-cta:hover { background: var(--blue-electric); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 0 5%;
+    background: linear-gradient(135deg, #0a1628 0%, #0d2d5e 60%, #0a1628 100%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a56db' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,86,219,0.25) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation: pulse-glow 4s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-glow {
+    from { opacity: 0.6; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.08); }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,212,255,0.12);
+    border: 1px solid rgba(0,212,255,0.35);
+    color: var(--accent);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 0.45rem 1rem;
+    border-radius: 100px; margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    animation: fadeInUp 0.7s ease 0.1s both;
+  }
+  .hero h1 span {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--blue-electric);
+  }
+  .hero p {
+    margin-top: 1.5rem;
+    color: var(--white-muted);
+    font-size: 1.1rem; line-height: 1.7;
+    max-width: 460px;
+    animation: fadeInUp 0.7s ease 0.2s both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease 0.3s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
+    color: white; padding: 1rem 2.2rem;
+    border: none; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(26,86,219,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,86,219,0.55); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 1rem 2.2rem; border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(0,212,255,0.08); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeInUp 0.7s ease 0.4s both;
+  }
+  .stat { border-left: 2px solid var(--blue-electric); padding-left: 1rem; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; color: var(--white); letter-spacing: 0.05em;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION COMMON */
+  section { padding: 6rem 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; text-transform: uppercase; line-height: 1.05;
+  }
+  .section-title span { color: var(--blue-electric); }
+
+  /* COACHES */
+  #coaches { background: #0b1e3d; }
+  .coaches-header { text-align: center; margin-bottom: 3.5rem; }
+  .coaches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .coach-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 12px; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .coach-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue-electric);
+    box-shadow: 0 16px 40px rgba(26,86,219,0.25);
+  }
+  .coach-avatar {
+    height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .coach-avatar.c1 { background: linear-gradient(135deg, #1a3a6b, #0d2d5e); }
+  .coach-avatar.c2 { background: linear-gradient(135deg, #0d3b5e, #1a56db22); }
+  .coach-avatar.c3 { background: linear-gradient(135deg, #0a2a50, #1a3a6b); }
+  .coach-avatar.c4 { background: linear-gradient(135deg, #102040, #0d3b5e); }
+  .coach-info { padding: 1.5rem; }
+  .coach-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem; font-weight: 800; text-transform: uppercase;
+  }
+  .coach-specialty {
+    color: var(--accent); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem;
+  }
+  .coach-bio { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0.75rem 0 1.2rem; }
+  .coach-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+  .tag {
+    background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25);
+    color: var(--blue-light); font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+  }
+  .coach-btn {
+    width: 100%; background: rgba(26,86,219,0.15);
+    border: 1px solid var(--blue-bright);
+    color: var(--white); padding: 0.75rem;
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .coach-btn:hover { background: var(--blue-bright); transform: scale(1.01); }
+
+  /* SCHEDULE MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,22,40,0.85); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: linear-gradient(145deg, #0d2d5e, #0a1628);
+    border: 1px solid rgba(59,130,246,0.35);
+    border-radius: 16px; padding: 2.5rem;
+    width: min(520px, 90vw); max-height: 85vh; overflow-y: auto;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(26,86,219,0.2);
+    animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: rgba(255,255,255,0.08); border: none;
+    color: white; width: 36px; height: 36px; border-radius: 50%;
+    font-size: 1.1rem; cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.15); }
+  .modal h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem; font-weight: 800; text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .modal-coach-name { color: var(--accent); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.8rem; }
+  .form-group { margin-bottom: 1.3rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--blue-light); margin-bottom: 0.5rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: white; padding: 0.8rem 1rem;
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--blue-electric); }
+  .form-group select option { background: #0d2d5e; }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .time-slot {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(59,130,246,0.2);
+    color: var(--white-muted); padding: 0.6rem; border-radius: 6px;
+    font-size: 0.82rem; font-weight: 500; cursor: pointer; text-align: center;
+    transition: all 0.15s;
+  }
+  .time-slot:hover, .time-slot.selected {
+    background: var(--blue-bright); border-color: var(--blue-bright); color: white;
+  }
+  .form-submit {
+    width: 100%; margin-top: 1.5rem;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
+    color: white; border: none; padding: 1rem;
+    border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(26,86,219,0.4);
+  }
+  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(26,86,219,0.55); }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none; text-align: center; padding: 2rem 0;
+  }
+  .success-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(26,86,219,0.2); border: 2px solid var(--blue-electric);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 1.5rem;
+    animation: bounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes bounceIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+  .success-state h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem; font-weight: 800; text-transform: uppercase;
+  }
+  .success-state p { color: #94a3b8; margin-top: 0.5rem; }
+
+  /* MEMBERSHIP */
+  #membership { background: var(--blue-deep); }
+  .membership-header { text-align: center; margin-bottom: 3.5rem; }
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+  }
+  .plan-card {
+    border-radius: 16px; padding: 2.5rem;
+    border: 1px solid rgba(59,130,246,0.2);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  }
+  .plan-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.3); }
+  .plan-card.featured {
+    background: linear-gradient(145deg, #1a3a7a, #0d2d5e);
+    border-color: var(--blue-electric);
+    box-shadow: 0 0 0 1px rgba(59,130,246,0.3), 0 12px 40px rgba(26,86,219,0.25);
+  }
+  .plan-badge {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: var(--accent); color: #0a1628;
+    font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px;
+  }
+  .plan-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; letter-spacing: 0.15em; color: var(--blue-light);
+    text-transform: uppercase;
+  }
+  .plan-price {
+    margin: 1.2rem 0;
+    display: flex; align-items: baseline; gap: 0.25rem;
+  }
+  .price-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 4rem; font-weight: 900; line-height: 1;
+  }
+  .price-period { color: var(--gray); font-size: 0.9rem; }
+  .plan-desc { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.5rem; }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem; color: var(--white-muted);
+  }
+  .plan-features li:last-child { border-bottom: none; }
+  .check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(59,130,246,0.2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; color: var(--blue-electric);
+  }
+  .plan-card.featured .check { background: rgba(0,212,255,0.15); color: var(--accent); }
+  .plan-cta {
+    width: 100%; padding: 0.9rem;
+    border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: all 0.2s;
+  }
+  .plan-cta.outline {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(59,130,246,0.35);
+  }
+  .plan-cta.outline:hover { border-color: var(--blue-electric); background: rgba(26,86,219,0.12); }
+  .plan-cta.solid {
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-electric));
+    color: white; border: none;
+    box-shadow: 0 4px 20px rgba(26,86,219,0.35);
+  }
+  .plan-cta.solid:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(26,86,219,0.5); }
+
+  /* PAYMENT MODAL */
+  .pay-modal {
+    background: linear-gradient(145deg, #0d2d5e, #0a1628);
+    border: 1px solid rgba(59,130,246,0.35);
+    border-radius: 16px; padding: 2.5rem;
+    width: min(480px, 90vw);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(26,86,219,0.2);
+    animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+  }
+  .plan-summary {
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .plan-summary-name { font-weight: 600; font-size: 0.95rem; }
+  .plan-summary-price { color: var(--accent); font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 800; }
+  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .card-field {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(59,130,246,0.25);
+    color: var(--gray); padding: 0.8rem 1rem;
+    border-radius: 6px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .card-icons { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+  .card-icon {
+    background: rgba(255,255,255,0.08); border-radius: 4px;
+    padding: 0.3rem 0.6rem; font-size: 0.75rem; color: var(--white-muted);
+    font-weight: 600; letter-spacing: 0.05em;
+  }
+  .secure-note {
+    text-align: center; font-size: 0.75rem; color: var(--gray);
+    margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  }
+
+  /* FEATURES */
+  #features {
+    background: linear-gradient(180deg, #0b1e3d 0%, #0a1628 100%);
+  }
+  .features-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .features-left .section-label { margin-bottom: 0.75rem; }
+  .features-list { list-style: none; margin-top: 2rem; }
+  .features-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .feature-icon {
+    width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(26,86,219,0.2); border: 1px solid rgba(59,130,246,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .feature-text h4 { font-weight: 600; margin-bottom: 0.2rem; }
+  .feature-text p { font-size: 0.88rem; color: #94a3b8; line-height: 1.5; }
+  .features-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .visual-card {
+    background: linear-gradient(145deg, rgba(26,86,219,0.1), rgba(255,255,255,0.03));
+    border: 1px solid rgba(59,130,246,0.15); border-radius: 12px;
+    padding: 1.8rem; text-align: center; transition: transform 0.2s;
+  }
+  .visual-card:hover { transform: scale(1.03); }
+  .visual-card:nth-child(2) { margin-top: 1.5rem; }
+  .visual-card:nth-child(4) { margin-top: -1.5rem; }
+  .visual-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem; color: var(--blue-electric); letter-spacing: 0.05em;
+  }
+  .visual-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
+
+  /* FOOTER */
+  footer {
+    background: #070f1e;
+    border-top: 1px solid rgba(59,130,246,0.1);
+    padding: 3rem 5% 2rem;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-tagline { color: #64748b; font-size: 0.85rem; margin-top: 0.3rem; }
+  .footer-links { display: flex; gap: 4rem; }
+  .footer-col h5 {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--blue-light); margin-bottom: 1rem;
+  }
+  .footer-col a {
+    display: block; color: #64748b; text-decoration: none; font-size: 0.88rem;
+    margin-bottom: 0.6rem; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.82rem; color: #475569; }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { font-size: 0.82rem; color: #475569; text-decoration: none; }
+  .footer-bottom-links a:hover { color: var(--white); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+    background: #0d2d5e; border: 1px solid var(--blue-electric);
+    border-radius: 10px; padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast span:first-child { font-size: 1.3rem; }
+  .toast-msg { font-weight: 600; font-size: 0.9rem; }
+  .toast-sub { font-size: 0.78rem; color: #94a3b8; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .features-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .features-visual { display: none; }
+    .footer-links { flex-direction: column; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">APE<span>X</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Facilities</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#footer">Contact</a></li>
+  </ul>
+  <a href="#membership" class="nav-cta">Join Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🏆 #1 Rated Gym in the City</div>
+    <h1>
+      Forge<br>
+      <span>Your</span>
+      Best
+    </h1>
+    <p>Elite training, world-class coaches, and a community that pushes you beyond what you thought possible.</p>
+    <div class="hero-actions">
+      <a href="#membership" class="btn-primary">Start Today</a>
+      <a href="#coaches" class="btn-outline">Meet the Coaches</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Members</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Expert Coaches</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-inner">
+    <div class="features-left">
+      <div class="section-label">World-Class Facilities</div>
+      <h2 class="section-title">Everything You Need To <span>Win</span></h2>
+      <ul class="features-list">
+        <li>
+          <div class="feature-icon">🏋️</div>
+          <div class="feature-text">
+            <h4>Full Strength Floor</h4>
+            <p>Over 200 pieces of premium equipment — racks, platforms, machines, and free weights.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon">🧘</div>
+          <div class="feature-text">
+            <h4>Group & Recovery Studios</h4>
+            <p>Yoga, HIIT, spin, and stretch classes led by certified instructors daily.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon">📊</div>
+          <div class="feature-text">
+            <h4>Performance Tracking</h4>
+            <p>Body composition, VO2 max testing, and personalized progress dashboards.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon">🥤</div>
+          <div class="feature-text">
+            <h4>Nutrition & Supplement Bar</h4>
+            <p>Post-workout shakes, meal prep guides, and dietitian consultations on-site.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="features-visual">
+      <div class="visual-card">
+        <div class="visual-num">24/7</div>
+        <div class="visual-label">Access</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-num">15K</div>
+        <div class="visual-label">Sq Ft Floor</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-num">40+</div>
+        <div class="visual-label">Weekly Classes</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-num">5⭐</div>
+        <div class="visual-label">Rated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section id="coaches">
+  <div class="coaches-header">
+    <div class="section-label">Personal Training</div>
+    <h2 class="section-title">Train With The <span>Best</span></h2>
+    <p style="color:#94a3b8;margin-top:0.75rem;max-width:520px;margin-inline:auto">
+      Book a 1-on-1 session with one of our certified coaches and get a program designed for your exact goals.
+    </p>
+  </div>
+  <div class="coaches-grid">
+
+    <div class="coach-card">
+      <div class="coach-avatar c1">💪</div>
+      <div class="coach-info">
+        <div class="coach-name">Marcus Reid</div>
+        <div class="coach-specialty">Strength & Powerlifting</div>
+        <p class="coach-bio">15+ years coaching competitive powerlifters. Marcus holds multiple national records and will maximize your strength in record time.</p>
+        <div class="coach-tags">
+          <span class="tag">Powerlifting</span>
+          <span class="tag">Hypertrophy</span>
+          <span class="tag">Nutrition</span>
+        </div>
+        <button class="coach-btn" onclick="openSchedule('Marcus Reid','Strength & Powerlifting')">📅 Book a Session</button>
+      </div>
+    </div>
+
+    <div class="coach-card">
+      <div class="coach-avatar c2">🏃</div>
+      <div class="coach-info">
+        <div class="coach-name">Sofia Vega</div>
+        <div class="coach-specialty">HIIT & Endurance</div>
+        <p class="coach-bio">Former Division I track athlete turned elite conditioning coach. Sofia's clients see dramatic improvements in cardio and fat loss.</p>
+        <div class="coach-tags">
+          <span class="tag">HIIT</span>
+          <span class="tag">Fat Loss</span>
+          <span class="tag">Cardio</span>
+        </div>
+        <button class="coach-btn" onclick="openSchedule('Sofia Vega','HIIT & Endurance')">📅 Book a Session</button>
+      </div>
+    </div>
+
+    <div class="coach-card">
+      <div class="coach-avatar c3">🧘</div>
+      <div class="coach-info">
+        <div class="coach-name">Kai Nakamura</div>
+        <div class="coach-specialty">Mobility & Functional Fitness</div>
+        <p class="coach-bio">Certified physical therapist and movement specialist. Kai rehabilitates injuries and builds bodies that move pain-free for life.</p>
+        <div class="coach-tags">
+          <span class="tag">Mobility</span>
+          <span class="tag">Rehab</span>
+          <span class="tag">Flexibility</span>
+        </div>
+        <button class="coach-btn" onclick="openSchedule('Kai Nakamura','Mobility & Functional Fitness')">📅 Book a Session</button>
+      </div>
+    </div>
+
+    <div class="coach-card">
+      <div class="coach-avatar c4">🥊</div>
+      <div class="coach-info">
+        <div class="coach-name">Leah Thompson</div>
+        <div class="coach-specialty">Boxing & Athletic Performance</div>
+        <p class="coach-bio">Pro boxing coach with 10 years developing athletic power. Leah trains everyone from beginners to competitive fighters.</p>
+        <div class="coach-tags">
+          <span class="tag">Boxing</span>
+          <span class="tag">Agility</span>
+          <span class="tag">Power</span>
+        </div>
+        <button class="coach-btn" onclick="openSchedule('Leah Thompson','Boxing & Athletic Performance')">📅 Book a Session</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership">
+  <div class="membership-header">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Monthly <span>Memberships</span></h2>
+    <p style="color:#94a3b8;margin-top:0.75rem">No contracts. Cancel anytime. Start today.</p>
+  </div>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">
+        <div class="price-num">$39</div>
+        <div class="price-period">/month</div>
+      </div>
+      <p class="plan-desc">Everything you need to build a consistent training habit.</p>
+      <ul class="plan-features">
+        <li><div class="check">✓</div> Full gym floor access</li>
+        <li><div class="check">✓</div> Locker rooms & showers</li>
+        <li><div class="check">✓</div> 5 group classes/month</li>
+        <li><div class="check">✓</div> Fitness assessment</li>
+        <li><div class="check">✗</div> <span style="color:#475569">Personal training sessions</span></li>
+      </ul>
+      <button class="plan-cta outline" onclick="openPayment('Basic','$39/mo')">Get Started</button>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">
+        <div class="price-num">$79</div>
+        <div class="price-period">/month</div>
+      </div>
+      <p class="plan-desc">Unlimited access plus monthly coaching to keep you on track.</p>
+      <ul class="plan-features">
+        <li><div class="check">✓</div> Full gym floor access</li>
+        <li><div class="check">✓</div> Unlimited group classes</li>
+        <li><div class="check">✓</div> 2 PT sessions/month</li>
+        <li><div class="check">✓</div> Nutrition guidance</li>
+        <li><div class="check">✓</div> Performance tracking</li>
+      </ul>
+      <button class="plan-cta solid" onclick="openPayment('Pro','$79/mo')">Get Started</button>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price">
+        <div class="price-num">$149</div>
+        <div class="price-period">/month</div>
+      </div>
+      <p class="plan-desc">The complete high-performance package for serious athletes.</p>
+      <ul class="plan-features">
+        <li><div class="check">✓</div> Everything in Pro</li>
+        <li><div class="check">✓</div> 8 PT sessions/month</li>
+        <li><div class="check">✓</div> Custom meal plan</div></li>
+        <li><div class="check">✓</div> Priority booking</li>
+        <li><div class="check">✓</div> Recovery lounge access</li>
+      </ul>
+      <button class="plan-cta outline" onclick="openPayment('Elite','$149/mo')">Get Started</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">APE<span>X</span></div>
+      <div class="footer-tagline">Forge Your Best · Est. 2015</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Gym</h5>
+        <a href="#">Facilities</a>
+        <a href="#">Classes</a>
+        <a href="#">Nutrition</a>
+        <a href="#">Recovery</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="#">📍 123 Iron Ave, Suite 100</a>
+        <a href="#">📞 (555) 864-2900</a>
+        <a href="#">✉️ hello@apexgym.com</a>
+        <a href="#">Mon–Sun · 5AM–11PM</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Apex Gym. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cancellation Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SCHEDULE MODAL -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeSchedule()">✕</button>
+    <h2>Book a Session</h2>
+    <div class="modal-coach-name" id="modalCoachLabel"></div>
+
+    <div id="scheduleForm">
+      <div class="form-group">
+        <label>Your Full Name</label>
+        <input type="text" placeholder="e.g. Jordan Smith" id="clientName">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com" id="clientEmail">
+      </div>
+      <div class="form-group">
+        <label>Select Date</label>
+        <input type="date" id="sessionDate">
+      </div>
+      <div class="form-group">
+        <label>Select Time</label>
+        <div class="time-slots" id="timeSlots">
+          <div class="time-slot" onclick="selectTime(this)">6:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this)">7:30 AM</div>
+          <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
+          <div class="time-slot" onclick="selectTime(this)">1:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this)">5:00 PM</div>
+          <div class="time-slot" onclick="selectTime(this)">6:30 PM</div>
+          <div class="time-slot" onclick="selectTime(this)">8:00 PM</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Session Type</label>
+        <select id="sessionType">
+          <option>Initial Consultation (Free)</option>
+          <option>1-Hour Training Session — $75</option>
+          <option>90-Min Deep Training — $110</option>
+          <option>Program Design Only — $50</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Goals / Notes (optional)</label>
+        <textarea id="sessionNotes" placeholder="Tell your coach what you'd like to work on..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitSchedule()">Confirm Booking</button>
+    </div>
+
+    <div class="success-state" id="scheduleSuccess">
+      <div class="success-icon">✅</div>
+      <h3>You're Booked!</h3>
+      <p id="successMsg">A confirmation has been sent to your email.</p>
+      <button class="form-submit" style="margin-top:1.5rem" onclick="closeSchedule()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="pay-modal">
+    <button class="modal-close" onclick="closePayment()">✕</button>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;text-transform:uppercase;margin-bottom:0.3rem">Subscribe</h2>
+    <p style="color:#64748b;font-size:0.85rem;margin-bottom:1.5rem">Secure monthly billing · Cancel anytime</p>
+
+    <div class="plan-summary">
+      <div>
+        <div class="plan-summary-name" id="payPlanName">Pro Membership</div>
+        <div style="font-size:0.75rem;color:#64748b;margin-top:0.2rem">Billed monthly</div>
+      </div>
+      <div class="plan-summary-price" id="payPlanPrice">$79/mo</div>
+    </div>
+
+    <div id="payForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Cardholder name" id="payName">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com" id="payEmail">
+      </div>
+      <div class="form-group">
+        <label>Card Number</label>
+        <div class="card-icons">
+          <span class="card-icon">VISA</span>
+          <span class="card-icon">MC</span>
+          <span class="card-icon">AMEX</span>
+        </div>
+        <input type="text" placeholder="1234  5678  9012  3456" id="cardNum" maxlength="19" oninput="formatCard(this)">
+      </div>
+      <div class="card-row">
+        <div class="form-group" style="margin:0">
+          <label>Expiry</label>
+          <input type="text" placeholder="MM / YY" id="cardExp" maxlength="7" oninput="formatExp(this)">
+        </div>
+        <div class="form-group" style="margin:0">
+          <label>CVV</label>
+          <input type="text" placeholder="•••" id="cardCvv" maxlength="4">
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitPayment()" style="margin-top:1.5rem">
+        🔒 Start Membership
+      </button>
+      <div class="secure-note">🔒 256-bit SSL encrypted · Your info is always safe</div>
+    </div>
+
+    <div class="success-state" id="paySuccess">
+      <div class="success-icon">🎉</div>
+      <h3>Welcome to Apex!</h3>
+      <p id="paySuccessMsg">Your membership is now active. Check your email for next steps.</p>
+      <button class="form-submit" style="margin-top:1.5rem" onclick="closePayment()">Let's Go!</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span>✅</span>
+  <div>
+    <div class="toast-msg" id="toastMsg">Success!</div>
+    <div class="toast-sub" id="toastSub">Check your email for confirmation.</div>
+  </div>
+</div>
+
+<script>
+  let selectedTime = null;
+  let currentCoach = '';
+
+  function openSchedule(name, specialty) {
+    currentCoach = name;
+    document.getElementById('modalCoachLabel').textContent = `with ${name} · ${specialty}`;
+    document.getElementById('scheduleForm').style.display = '';
+    document.getElementById('scheduleSuccess').style.display = 'none';
+    document.getElementById('scheduleModal').classList.add('active');
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('sessionDate').min = today;
+    document.getElementById('sessionDate').value = today;
+    selectedTime = null;
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  }
+
+  function closeSchedule() {
+    document.getElementById('scheduleModal').classList.remove('active');
+    // Reset
+    document.getElementById('clientName').value = '';
+    document.getElementById('clientEmail').value = '';
+    document.getElementById('sessionNotes').value = '';
+  }
+
+  function selectTime(el) {
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedTime = el.textContent;
+  }
+
+  function submitSchedule() {
+    const name = document.getElementById('clientName').value.trim();
+    const email = document.getElementById('clientEmail').value.trim();
+    const date = document.getElementById('sessionDate').value;
+    if (!name || !email || !date || !selectedTime) {
+      showToast('⚠️ Missing Info', 'Please fill in all fields and select a time.', true);
+      return;
+    }
+    const fmt = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric'});
+    document.getElementById('successMsg').textContent =
+      `${selectedTime} on ${fmt} with ${currentCoach}. Check ${email} for your confirmation.`;
+    document.getElementById('scheduleForm').style.display = 'none';
+    document.getElementById('scheduleSuccess').style.display = 'block';
+    showToast('📅 Session Booked!', `${currentCoach} · ${selectedTime}`);
+  }
+
+  function openPayment(plan, price) {
+    document.getElementById('payPlanName').textContent = plan + ' Membership';
+    document.getElementById('payPlanPrice').textContent = price;
+    document.getElementById('payForm').style.display = '';
+    document.getElementById('paySuccess').style.display = 'none';
+    document.getElementById('paymentModal').classList.add('active');
+  }
+
+  function closePayment() {
+    document.getElementById('paymentModal').classList.remove('active');
+    document.getElementById('payName').value = '';
+    document.getElementById('payEmail').value = '';
+    document.getElementById('cardNum').value = '';
+    document.getElementById('cardExp').value = '';
+    document.getElementById('cardCvv').value = '';
+  }
+
+  function formatCard(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 16);
+    el.value = v.replace(/(.{4})/g, '$1 ').trim();
+  }
+
+  function formatExp(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length >= 3) v = v.slice(0, 2) + ' / ' + v.slice(2);
+    el.value = v;
+  }
+
+  function submitPayment() {
+    const name = document.getElementById('payName').value.trim();
+    const email = document.getElementById('payEmail').value.trim();
+    const card = document.getElementById('cardNum').value.replace(/\s/g, '');
+    const exp = document.getElementById('cardExp').value;
+    const cvv = document.getElementById('cardCvv').value;
+    if (!name || !email || card.length < 16 || exp.length < 4 || cvv.length < 3) {
+      showToast('⚠️ Incomplete', 'Please fill in all payment details.', true);
+      return;
+    }
+    const plan = document.getElementById('payPlanName').textContent;
+    document.getElementById('paySuccessMsg').textContent =
+      `Your ${plan} is active! A receipt is on its way to ${email}.`;
+    document.getElementById('payForm').style.display = 'none';
+    document.getElementById('paySuccess').style.display = 'block';
+    showToast('🎉 Welcome to Apex!', 'Your membership is now active.');
+  }
+
+  function showToast(msg, sub, isWarn) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    document.getElementById('toastSub').textContent = sub;
+    t.style.borderColor = isWarn ? '#f59e0b' : 'var(--blue-electric)';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3800);
+  }
+
+  // Close modals on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>
